@@ -19,16 +19,16 @@
                   { lp_##name = v; }        \
     public:  type name(void) const          \
                   { return lp_##name; }
-
-//#define LoPropertyObj(type, name) \
-//    private: type lp_##name;                 \
-//    signals: void sig##name##Changed(type v) \
-//    public:  void set##name(type v)          \
-//                  { lp_##name = v;           \
-//                    sig##name##Changed(v); } \
-//    public:  type name(void) const           \
-//                  { return lp_##name; }
-
+/*
+#define LoPropertyObj(type, name) \
+    private: type lp_##name;                 \
+    signals: void sig##name##Changed(type v) \
+    public:  void set##name(type v)          \
+                  { lp_##name = v;           \
+                    sig##name##Changed(v); } \
+    public:  type name(void) const           \
+                  { return lp_##name; }
+*/
 class LoTools
 {
 protected:
