@@ -226,7 +226,8 @@ void LoSerial::onReadyRead()
     } else {
         s = QString().fromUtf8(a);
     }
-    ui->RxData->append(s);
+    s = ui->RxData->toPlainText() + s;
+    ui->RxData->setPlainText(s);
 }
 
 void LoSerial::onHexRxChecked(bool isChecked)
