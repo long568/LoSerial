@@ -3,14 +3,11 @@
 
 LoSerial::LoSerial(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::LoSerial)
+    ui(new Ui::LoSerial),
+    m_Translator(0)
 {
     ui->setupUi(this);
-
-//    m_Translator = new QTranslator(this);
-//    m_Translator->load("enUS.qm");
-//    qApp->installTranslator(m_Translator);
-//    ui->retranslateUi(this);
+    m_appPath = QCoreApplication::applicationDirPath();
     QStringList sp_name_list;
     QList<QSerialPortInfo> sp_list = QSerialPortInfo::availablePorts();
     foreach (QSerialPortInfo sp_ifo, sp_list)
@@ -183,30 +180,26 @@ void LoSerial::sendData()
 
 void LoSerial::onLanguageChanged()
 {
-    if(ui->actionEnglish->isChecked())
-        do{}while(0);
+    QString lan;
+    if(ui->actionChinese->isChecked())
+        lan = ":/zhCN";
     else
-        do{}while(0);
+        lan = ":/enUS";
 
-    //    QString lanf;
-    //    switch (index) {
-    //    case 0:
-    //        lanf = "enUS.qm";
-    //        break;
-    //    case 1:
-    //        lanf = "zhCN.qm";
-    //        break;
-    //    default: return;
-    //    }
-    //    if(m_Translator->load(lanf)) {
-    //        ui->retranslateUi(this);
-    //        m_LanguageIndex = index;
-    //        if(!ui->COMSetting->isEnabled())
-    //            ui->Open->setText(tr("Close"));
-    //    } else {
-    //        QMessageBox::critical(this, tr("Error"), tr("Load new language failed !"));
-    //        ui->ChangeLanguage->setCurrentIndex(m_LanguageIndex);
-    //    }
+    if(m_Translator == 0) {
+        m_Translator = new QTranslator(this);
+        m_Translator->load(lan);
+        qApp->installTranslator(m_Translator);
+        ui->retranslateUi(this);
+    } else {
+        if(m_Translator->load(lan)) {
+            ui->retranslateUi(this);
+            if(!ui->COMSetting->isEnabled())
+                ui->Open->setText(tr("Close"));
+        } else {
+            QMessageBox::critical(this, tr("Error"), tr("Load new language failed !"));
+        }
+    }
 }
 
 void LoSerial::onOpenClicked()

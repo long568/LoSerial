@@ -54,6 +54,7 @@ private:
     QSerialPort  *m_SerialPort;
     QTranslator  *m_Translator;
     QTimer       *m_timAutoTx;
+    QString      m_appPath;
 };
 
 #endif // LOSERIAL_H

@@ -34,3 +34,10 @@ HEADERS += \
 
 FORMS += \
         loserial.ui
+
+ICON = LoSerial.icns
+
+TRANSLATIONS += Languages/zhCN.ts Languages/enUS.ts
+
+RESOURCES += \
+    languages.qrc

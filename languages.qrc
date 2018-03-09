@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="zhCN">Languages/zhCN.qm</file>
+        <file alias="enUS">Languages/enUS.qm</file>
+    </qresource>
+</RCC>
