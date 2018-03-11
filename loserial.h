@@ -14,8 +14,13 @@
 #include <QVariant>
 
 #include "lotools.h"
+#include "about.h"
 
-#define CONF_FILE "Config.ini"
+#if defined(Q_OS_MACOS)
+#  define CONF_FILE m_appPath+"/../Resources/"+"Config.ini"
+#elif
+#  define CONF_FILE "Config.ini"
+#endif
 
 namespace Ui {
 class LoSerial;
@@ -47,6 +52,7 @@ private slots:
     void onError(QSerialPort::SerialPortError error);
     void onAutoTxChecked(bool isChecked);
     void onAutoTx();
+    void onShowAbout();
 
 private:
     Ui::LoSerial *ui;
@@ -54,7 +60,7 @@ private:
     QSerialPort  *m_SerialPort;
     QTranslator  *m_Translator;
     QTimer       *m_timAutoTx;
-    QString      m_appPath;
+    QString       m_appPath;
 };
 
 #endif // LOSERIAL_H

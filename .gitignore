@@ -1,3 +1,15 @@
 
+LoSerial
+LoSerial.build
+LoSerial.xcodeproj
+Qt5AppPushToMacAppStore
+.qmake.stash
+Config.ini
+Info.plist
 *.user
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+Debug
 .DS_Store

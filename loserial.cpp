@@ -27,6 +27,7 @@ LoSerial::LoSerial(QWidget *parent) :
     connect(ui->HexRx,  SIGNAL(toggled(bool)), this, SLOT(onHexRxChecked(bool)));
     connect(ui->HexTx,  SIGNAL(toggled(bool)), this, SLOT(onHexTxChecked(bool)));
     connect(ui->AutoTx, SIGNAL(toggled(bool)), this, SLOT(onAutoTxChecked(bool)));
+    connect(ui->actionAbout, SIGNAL(triggered(bool)), this, SLOT(onShowAbout()));
 }
 
 LoSerial::~LoSerial()
@@ -114,6 +115,8 @@ void LoSerial::loadConf()
         if(settings.value("Rx_Data").isValid())
             ui->RxData->setPlainText(settings.value("Rx_Data").toString());
     }
+    
+//    ui->RxData->setText(m_appPath);
 }
 
 void LoSerial::openSerialPort()
@@ -271,4 +274,10 @@ void LoSerial::onAutoTx()
 {
     if(m_isOpened)
         sendData();
+}
+
+void LoSerial::onShowAbout()
+{
+    About *p = new About(this);
+    p->exec();
 }

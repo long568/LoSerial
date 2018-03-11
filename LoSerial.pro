@@ -26,14 +26,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         loserial.cpp \
-    lotools.cpp
+    lotools.cpp \
+    about.cpp
 
 HEADERS += \
         loserial.h \
-    lotools.h
+    lotools.h \
+    about.h
 
 FORMS += \
-        loserial.ui
+        loserial.ui \
+    about.ui
 
 ICON = LoSerial.icns
 
