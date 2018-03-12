@@ -16,11 +16,7 @@
 #include "lotools.h"
 #include "about.h"
 
-#if defined(Q_OS_MACOS)
-#  define CONF_FILE m_appPath+"/../Resources/"+"Config.ini"
-#elif
-#  define CONF_FILE "Config.ini"
-#endif
+#define CONF_FILE "Config.ini"
 
 namespace Ui {
 class LoSerial;

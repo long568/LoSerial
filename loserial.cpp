@@ -55,7 +55,7 @@ void LoSerial::keyPressEvent(QKeyEvent *event)
 
 void LoSerial::saveConf()
 {
-    QSettings settings(CONF_FILE, QSettings::IniFormat);
+    QSettings settings(CONF_FILE, QSettings::NativeFormat);
     if(ui->actionEnglish->isChecked())
         settings.setValue("Language", QVariant("enUS"));
     else
@@ -80,7 +80,7 @@ void LoSerial::loadConf()
 {
     QFile f(CONF_FILE);
     if(f.exists()) {
-        QSettings settings(CONF_FILE, QSettings::IniFormat);
+        QSettings settings(CONF_FILE, QSettings::NativeFormat);
         if(settings.value("Language").isValid()) {
             QString lan = settings.value("Language").toString();
             if(lan == "enUS") ui->actionEnglish->setChecked(true);
@@ -115,8 +115,6 @@ void LoSerial::loadConf()
         if(settings.value("Rx_Data").isValid())
             ui->RxData->setPlainText(settings.value("Rx_Data").toString());
     }
-    
-//    ui->RxData->setText(m_appPath);
 }
 
 void LoSerial::openSerialPort()
