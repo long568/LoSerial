@@ -38,7 +38,8 @@ FORMS += \
         loserial.ui \
     about.ui
 
-ICON = LoSerial.icns
+win32:RC_ICONS = LoSerial.ico
+osx:ICON = LoSerial.icns
 
 TRANSLATIONS += Languages/zhCN.ts Languages/enUS.ts
 
