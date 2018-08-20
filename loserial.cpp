@@ -177,6 +177,7 @@ void LoSerial::sendData()
     if(a.isEmpty())
         return;
     m_SerialPort->write(a);
+    LoTools::go2TheEnd(ui->RxData);
 }
 
 void LoSerial::onLanguageChanged()
@@ -222,6 +223,7 @@ void LoSerial::onReadyRead()
     }
     s = ui->RxData->toPlainText() + s;
     ui->RxData->setPlainText(s);
+    LoTools::go2TheEnd(ui->RxData);
 }
 
 void LoSerial::onHexRxChecked(bool isChecked)
