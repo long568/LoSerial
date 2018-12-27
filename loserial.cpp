@@ -4,7 +4,7 @@
 LoSerial::LoSerial(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::LoSerial),
-    m_Translator(0)
+    m_Translator(nullptr)
 {
     ui->setupUi(this);
     m_appPath = QCoreApplication::applicationDirPath();
@@ -55,7 +55,7 @@ void LoSerial::keyPressEvent(QKeyEvent *event)
 
 void LoSerial::saveConf()
 {
-    QSettings settings(CONF_FILE, CONF_FORMAT);
+    QSettings settings("long", "LoSerial");
     if(ui->actionEnglish->isChecked())
         settings.setValue("Language", QVariant("enUS"));
     else
@@ -78,43 +78,40 @@ void LoSerial::saveConf()
 
 void LoSerial::loadConf()
 {
-    QFile f(CONF_FILE);
-    if(f.exists()) {
-        QSettings settings(CONF_FILE, CONF_FORMAT);
-        if(settings.value("Language").isValid()) {
-            QString lan = settings.value("Language").toString();
-            if(lan == "enUS") ui->actionEnglish->setChecked(true);
-            else              ui->actionChinese->setChecked(true);
-        }
-        if(settings.value("Com_Index").isValid())
-            ui->COMs->setCurrentText(settings.value("Com_Index").toString());
-        if(settings.value("Baud_Rate").isValid())
-            ui->BaudRate->setCurrentText(settings.value("Baud_Rate").toString());
-        if(settings.value("Data_Bits").isValid())
-            ui->DataBits->setCurrentText(settings.value("Data_Bits").toString());
-        if(settings.value("Stop_Bits").isValid())
-            ui->StopBits->setCurrentIndex(settings.value("Stop_Bits").toInt());
-        if(settings.value("Parity_Md").isValid())
-            ui->ParityMode->setCurrentIndex(settings.value("Parity_Md").toInt());
-        if(settings.value("Flow_Ctrl").isValid())
-            ui->FlowControl->setCurrentIndex(settings.value("Flow_Ctrl").toInt());
-        if(settings.value("Hex_Rx").isValid())
-            ui->HexRx->setChecked(settings.value("Hex_Rx").toBool());
-        if(settings.value("Hex_Tx").isValid())
-            ui->HexTx->setChecked(settings.value("Hex_Tx").toBool());
-        if(settings.value("Echo").isValid())
-            ui->Echo->setChecked(settings.value("Echo").toBool());
-        if(settings.value("Attach_CR").isValid())
-            ui->AttachCR->setChecked(settings.value("Attach_CR").toBool());
-        if(settings.value("Aut_Clear").isValid())
-            ui->AutoClear->setChecked(settings.value("Aut_Clear").toBool());
-        if(settings.value("Aut_Tx_Ir").isValid())
-            ui->AutoTxInterval->setValue(settings.value("Aut_Tx_Ir").toInt());
-        if(settings.value("Tx_Data").isValid())
-            ui->TxData->setText(settings.value("Tx_Data").toString());
-        if(settings.value("Rx_Data").isValid())
-            ui->RxData->setPlainText(settings.value("Rx_Data").toString());
+    QSettings settings("long", "LoSerial");
+    if(settings.value("Language").isValid()) {
+        QString lan = settings.value("Language").toString();
+        if(lan == "enUS") ui->actionEnglish->setChecked(true);
+        else              ui->actionChinese->setChecked(true);
     }
+    if(settings.value("Com_Index").isValid())
+        ui->COMs->setCurrentText(settings.value("Com_Index").toString());
+    if(settings.value("Baud_Rate").isValid())
+        ui->BaudRate->setCurrentText(settings.value("Baud_Rate").toString());
+    if(settings.value("Data_Bits").isValid())
+        ui->DataBits->setCurrentText(settings.value("Data_Bits").toString());
+    if(settings.value("Stop_Bits").isValid())
+        ui->StopBits->setCurrentIndex(settings.value("Stop_Bits").toInt());
+    if(settings.value("Parity_Md").isValid())
+        ui->ParityMode->setCurrentIndex(settings.value("Parity_Md").toInt());
+    if(settings.value("Flow_Ctrl").isValid())
+        ui->FlowControl->setCurrentIndex(settings.value("Flow_Ctrl").toInt());
+    if(settings.value("Hex_Rx").isValid())
+        ui->HexRx->setChecked(settings.value("Hex_Rx").toBool());
+    if(settings.value("Hex_Tx").isValid())
+        ui->HexTx->setChecked(settings.value("Hex_Tx").toBool());
+    if(settings.value("Echo").isValid())
+        ui->Echo->setChecked(settings.value("Echo").toBool());
+    if(settings.value("Attach_CR").isValid())
+        ui->AttachCR->setChecked(settings.value("Attach_CR").toBool());
+    if(settings.value("Aut_Clear").isValid())
+        ui->AutoClear->setChecked(settings.value("Aut_Clear").toBool());
+    if(settings.value("Aut_Tx_Ir").isValid())
+        ui->AutoTxInterval->setValue(settings.value("Aut_Tx_Ir").toInt());
+    if(settings.value("Tx_Data").isValid())
+        ui->TxData->setText(settings.value("Tx_Data").toString());
+    if(settings.value("Rx_Data").isValid())
+        ui->RxData->setPlainText(settings.value("Rx_Data").toString());
 }
 
 void LoSerial::openSerialPort()

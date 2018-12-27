@@ -16,14 +16,6 @@
 #include "lotools.h"
 #include "about.h"
 
-#define CONF_FILE "LoSerial.cfg"
-
-#if defined(Q_OS_WIN32)
-#   define CONF_FORMAT QSettings::IniFormat
-#elif defined(Q_OS_MACOS)
-#   define CONF_FORMAT QSettings::NativeFormat
-#endif
-
 namespace Ui {
 class LoSerial;
 }
