@@ -3,6 +3,7 @@
 LoTools::LoTools(){}
 
 // Network
+#if TOOL_NETWORK
 QStringList LoTools::getLocalIPv4List()
 {
     QStringList res;
@@ -13,6 +14,7 @@ QStringList LoTools::getLocalIPv4List()
     }
     return res;
 }
+#endif
 
 // Data Conversion
 QByteArray LoTools::Hex2BArray(const QString &h)

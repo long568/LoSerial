@@ -3,8 +3,12 @@
 
 #include <QString>
 #include <QStringList>
-#include <QtNetwork>
 #include <QTextEdit>
+
+#define TOOL_NETWORK 0
+#if TOOL_NETWORK
+#include <QtNetwork>
+#endif
 
 #define LoProperty0(type, name) \
     private: type lp_##name;           \
@@ -34,8 +38,10 @@ class LoTools
 protected:
     LoTools();
 
+#if TOOL_NETWORK
 public: // Network
     static QStringList getLocalIPv4List();
+#endif
 
 public: // Data Conversion
     static QByteArray Hex2BArray(const QString    &h);
