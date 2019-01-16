@@ -130,8 +130,10 @@ void LoSerial::openSerialPort()
             ui->Open->setText(tr("Close"));
             m_isOpened = true;
         } else {
+            QMetaEnum err_enum = QMetaEnum::fromType<QSerialPort::SerialPortError>();
             QString msg = tr("Open failed ... ");
-            msg += QString("%1").arg((int)m_SerialPort->error());
+            QString err = err_enum.valueToKey(m_SerialPort->error());
+            msg += QString("\n%1").arg(err);
             QMessageBox::critical(this, tr("Error"), msg);
             m_SerialPort->deleteLater();
             m_SerialPort = NULL;

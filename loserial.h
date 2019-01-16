@@ -12,6 +12,7 @@
 #include <QTimer>
 #include <QSettings>
 #include <QVariant>
+#include <QMetaEnum>
 
 #include "lotools.h"
 #include "about.h"
