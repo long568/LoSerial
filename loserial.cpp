@@ -169,10 +169,12 @@ void LoSerial::sendData()
         if(ui->HexRx->isChecked())
             s = LoTools::Str2Hex(s);
     }
-    if(ui->Echo->isChecked())
+    if(ui->Echo->isChecked()) {
         ui->RxData->append(s);
+        ui->RxData->append("\n");
+    }
     if(ui->AttachCR->isChecked())
-        a.append('\r');
+        a.append("\r\n", 2);
     if(a.isEmpty())
         return;
     m_SerialPort->write(a);
