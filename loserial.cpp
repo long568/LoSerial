@@ -66,6 +66,7 @@ void LoSerial::saveConf()
     settings.setValue("Stop_Bits", QVariant(ui->StopBits->currentIndex()));
     settings.setValue("Parity_Md", QVariant(ui->ParityMode->currentIndex()));
     settings.setValue("Flow_Ctrl", QVariant(ui->FlowControl->currentIndex()));
+    settings.setValue("Stop_Rx",   QVariant(ui->StopRx->isChecked()));
     settings.setValue("Hex_Rx",    QVariant(ui->HexRx->isChecked()));
     settings.setValue("Hex_Tx",    QVariant(ui->HexTx->isChecked()));
     settings.setValue("Echo",      QVariant(ui->Echo->isChecked()));
@@ -96,6 +97,8 @@ void LoSerial::loadConf()
         ui->ParityMode->setCurrentIndex(settings.value("Parity_Md").toInt());
     if(settings.value("Flow_Ctrl").isValid())
         ui->FlowControl->setCurrentIndex(settings.value("Flow_Ctrl").toInt());
+    if(settings.value("Stop_Rx").isValid())
+        ui->StopRx->setChecked(settings.value("Stop_Rx").toBool());
     if(settings.value("Hex_Rx").isValid())
         ui->HexRx->setChecked(settings.value("Hex_Rx").toBool());
     if(settings.value("Hex_Tx").isValid())
@@ -217,6 +220,11 @@ void LoSerial::onReadyRead()
 {
     QString s;
     QByteArray a = m_SerialPort->readAll();
+
+    if(ui->StopRx->isChecked()) {
+        return;
+    }
+
     if(ui->HexRx->isChecked()) {
         s = LoTools::BArray2Hex(a);
     } else {

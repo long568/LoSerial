@@ -17,6 +17,9 @@
 #include "lotools.h"
 #include "about.h"
 
+#define TIMEOUT_CARDID 2000
+#define CARD_ID_SIZE   14
+
 namespace Ui {
 class LoSerial;
 }
